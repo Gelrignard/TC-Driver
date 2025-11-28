@@ -7,9 +7,9 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - ..:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
       - DISPLAY=${DISPLAY:-:0}
     stdin_open: true
     tty: true
-    # For GUI support (optional)
-    # network_mode: host
+    network_mode: host

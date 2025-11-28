@@ -1,8 +1,8 @@
-FROM ubuntu:20.04
+FROM ros:noetic-ros-base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies
+# Install system dependencies + ROS packages
 RUN apt-get update --fix-missing && \
     apt-get install -y \
     python3-dev \
@@ -17,7 +17,22 @@ RUN apt-get update --fix-missing && \
     vim \
     xvfb \
     ffmpeg \
+    libeigen3-dev \
+    ros-noetic-tf2 \
+    ros-noetic-tf2-ros \
+    ros-noetic-ackermann-msgs \
+    ros-noetic-map-server \
+    ros-noetic-rviz \
+    ros-noetic-xacro \
+    ros-noetic-robot-state-publisher \
+    ros-noetic-nav-msgs \
+    ros-noetic-geometry-msgs \
+    ros-noetic-std-msgs \
+    ros-noetic-sensor-msgs \
     && rm -rf /var/lib/apt/lists/*
+
+# Source ROS in bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Upgrade pip but keep it below 24.1 for gym==0.21.0 compatibility
 RUN pip3 install --upgrade "pip<24.1"
