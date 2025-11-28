@@ -1,0 +1,4 @@
+conda activate tc-driver
+
+source ~/catkin/devel/setup.bash
+
